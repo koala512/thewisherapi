@@ -20,14 +20,6 @@ const { Model, Sequelize } = require('sequelize');
  */
  class Item  extends Model {
 
-   Item.init({
-    title: Sequelize.STRING,
-    url: Sequelize.STRING,
-    comment: Sequelize.STRING,
-    list_id: Sequelize.STRING
-    }, {});
-
-
     /**
      * Fetches every Item  in the database
      * @returns {Array<Item>}
@@ -120,5 +112,16 @@ const { Model, Sequelize } = require('sequelize');
 
     
 }
+
+Item.init({
+    title: Sequelize.STRING,
+    url: Sequelize.STRING,
+    comment: Sequelize.STRING,
+    list_id: Sequelize.STRING 
+    }, {
+        sequelize,
+        tableName: 'item'
+    }
+    );
 
 module.exports = Item ;
