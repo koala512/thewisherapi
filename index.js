@@ -1,9 +1,7 @@
 require('dotenv').config();
 const express = require('express');
-const sequelize = require('./app/database');
 const app = express();
 const cors = require('cors');
-const expressSwagger = require('express-swagger-generator')(app);
 const apiRouter = require('./app/router');
 
 const PORT = process.env.PORT || 5555;
