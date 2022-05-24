@@ -1,0 +1,18 @@
+### create user 
+POST http://localhost:5000/user
+Content-Type: application/json
+
+{
+    "pseudo":"nico",
+    "email":"nico@gmail.com",
+    "password":"nico"
+}
+
+###create a list    
+POST http://localhost:5000/lists
+Content-Type: application/json
+
+{
+    "title": "test",
+    "coment": "test"
+}
