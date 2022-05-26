@@ -5,27 +5,25 @@ const privateKey = require('../../auth/private_key')
 
 module.exports = (app) => {
   app.post('/login', (req, res) => {
-    
+    // find user by email in the database 
     User.findOne({ where: { email: req.body.email } }).then(user => {
-
+      // if user is not found send error message
       if(!user) {
         const message = `L'utilisateur demandé n'existe pas.`
         return res.status(404).json({ message })
       }
-      //check if password is correct
+      //check if password is correct by comparing it with the hash stored in the database
       return bcrypt.compare(req.body.password, user.password).then(isPasswordValid => {
         if(!isPasswordValid) {
           const message = `Le mot de passe est incorrect.`
           return res.status(401).json({message})
         }
-
         // Generate token for 24h
         const token = jwt.sign(
           { userId: user.id },
           privateKey,
           { expiresIn: '24h' }
         );
-
         const message = `L'utilisateur a été connecté avec succès`;
         return res.json({ message, data: user, token })
       })

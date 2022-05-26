@@ -6,7 +6,7 @@ const privateKey = require('../../auth/private_key')
 module.exports = (app) => {
     app.post('/user', (req, res) => {
         const { pseudo, email, password } = req.body;
-        // const passwordHash = bcrypt.hashSync(password, 10);
+        // hash password before saving it in the database
         bcrypt.hash(password, 10)
             .then(hash => User.create({ pseudo, email, password: hash }))
             .catch(error => {
@@ -25,9 +25,3 @@ module.exports = (app) => {
             })
     })
 }
-
-
-
-
-        
-

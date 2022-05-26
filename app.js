@@ -5,12 +5,19 @@ const bodyParser = require('body-parser')
 const app = express();
 const cors = require('cors');
 
+//define port
 const PORT = process.env.PORT || 5000;
 
+
 app.use(bodyParser.json());
+// use cors to allow cross origin resource sharing
 app.use(cors());
 // on prévient le serveur que certains requêtes auront un body en JSON
 app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.json('hello heroku')
+})
 
 //user routes
 require('./src/routes/user/createUser')(app)

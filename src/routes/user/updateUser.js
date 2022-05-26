@@ -3,10 +3,10 @@ const bcrypt = require('bcrypt')
 const auth = require('../../auth/auth')
 
 module.exports = (app) => {
+    //update one user 
     app.put('/user/:uuid',auth, (req, res) => {
-        //update one user
         const { pseudo, email, password } = req.body;
-        // const passwordHash = bcrypt.hashSync(password, 10);
+        // hash password before saving it in the database
         bcrypt.hash(password, 10)
             .then(hash => User.update({ pseudo, email, password: hash }, { where: { uuid: req.params.uuid } }))
             .catch(error => {
