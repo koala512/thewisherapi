@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({List}) {
       // define association here
-      this.belongsTo(List, { foreignKey: 'listId', as: 'lists' });
+      this.belongsTo(List, { foreignKey: 'listId' });
     }
   }
   Item.init({
@@ -19,8 +19,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    imageUrl: {
-      type: DataTypes.STRING,
+    url: {
+      type: DataTypes.STRING(1234),
+      allowNull: true,
+    },
+    image: {
+      type: DataTypes.STRING(1234),
       allowNull: true,
     },
     comment: {

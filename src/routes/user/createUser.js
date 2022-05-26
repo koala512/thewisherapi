@@ -1,7 +1,7 @@
-const { User } = require('../../models');
+const { User } = require('../../../models');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
-const privateKey = require('../auth/private_key')
+const privateKey = require('../../auth/private_key')
 
 module.exports = (app) => {
     app.post('/user', (req, res) => {
@@ -13,6 +13,7 @@ module.exports = (app) => {
                 const message = `L'utilisateur n'a pas pu être connecté. Réessayez dans quelques instants.`
                 res.status(500).json({ message, data: error })
             })
+            //set userId in a jwt
             .then(user => {
                 const token = jwt.sign(
                     { userId: user.id },

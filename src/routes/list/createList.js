@@ -1,7 +1,7 @@
-const { User,List } = require('../../models');
+const { User,List } = require('../../../models');
 
 const { ValidationError, UniqueConstraintError } = require('sequelize')
-const auth = require('../auth/auth')
+const auth = require('../../auth/auth')
 
 module.exports = (app) => {
   app.post('/list', auth, (req, res) => {

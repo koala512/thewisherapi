@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, DataTypes) {
-    await queryInterface.createTable('Items', {
+    await queryInterface.createTable('items', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,8 +12,12 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      imageUrl: {
-        type: DataTypes.STRING,
+      url: {
+        type: DataTypes.STRING(1234),
+        allowNull: true,
+      },
+      image: {
+        type: DataTypes.STRING(1234),
         allowNull: true,
       },
       comment: {

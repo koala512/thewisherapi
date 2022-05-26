@@ -12,10 +12,21 @@ app.use(cors());
 // on prévient le serveur que certains requêtes auront un body en JSON
 app.use(express.json());
 
-require('./src/routes/createUser')(app)
-require('./src/routes/login')(app)
-require('./src/routes/createList')(app)
-
+//user routes
+require('./src/routes/user/createUser')(app)
+require('./src/routes/user/login')(app)
+require('./src/routes/user/updateUser')(app)
+require('./src/routes/user/deleteUser')(app)
+//list routes
+require('./src/routes/list/createList')(app)
+require('./src/routes/list/getAllList')(app)
+require('./src/routes/list/getOneList')(app)
+require('./src/routes/list/updateList')(app)
+require('./src/routes/list/deleteList')(app)
+//item routes
+require('./src/routes/item/createItem')(app)
+require('./src/routes/item/updateItem')(app)
+require('./src/routes/item/deleteItem')(app)
 
 app.listen( PORT , async () => {
     console.log(`Server up on http://localhost:${PORT}`)
