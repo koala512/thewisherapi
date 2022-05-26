@@ -2,10 +2,6 @@ const User = require("../models/user");
 const bcrypt = require('bcrypt');
 const createToken = require ('../../utils').createToken
 
-
-/**
- * 
- */
 const authController = {
 
     async add(req,res) {

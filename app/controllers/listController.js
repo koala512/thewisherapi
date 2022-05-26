@@ -2,18 +2,15 @@ const List = require('../models/list');
 const Item =require('../models/item');
 const User =require ('../models/user');
 
+const listSchema = require('../schemas/list');
+const { creatItem } = require('./itemController');
 
 const listController = {
 
-    
     allLists: async (req, res) => {
        
         try {const user= req.decoded;
-          //  console.log(user);
-            
-            //const userId= user.rows[0]
-            //console.log(userId, "userId dans allLists");
-            const theLists = await List.findAll(user.userId);
+           const theLists = await List.findAll(user.userId);
             res.json(theLists);
         } catch (error) {
             res.status(500).json(error.stack + 'Erreur interne du serveur');
@@ -28,10 +25,6 @@ const listController = {
 
         const { id } = {"id":paramId.listId}
         const oneList = await List.findOne(id);
-       // console.log(oneList, "oneList");
-       // console.log(oneList.user_id, "user_id");
-       // console.log(user, "user" );
-        
 
         if ( oneList.user_id === user.userId) {
 
@@ -48,13 +41,9 @@ const listController = {
             res.status(404).json("The list selected doesn't exist");
         }
     },
-
-
     // POST /lists
     creatList: async (req, res) => {
-
         const user =req.decoded.userId;
-        //console.log(user, "user"); 
         const list ={
             "title":req.body.title,
             "coment":req.body.coment,
@@ -62,16 +51,13 @@ const listController = {
         };
         if(user !== null){
         const newList = new List(list);
-            //console.log(newList);
             try {
                 await newList.save();
                 res.json(newList);
-
             } catch (error) {
-               // console.log(error)
                 res.status(500).send('Une erreur est surevnue');
             }
-        }else{
+        } else {
             res.status(401).json("veuillez vous connecter")
         }
     },
@@ -79,13 +65,11 @@ const listController = {
     updateList: async (req,res) => {
 
         const user =req.decoded.userId;
-        //console.log(user,"user id");
         const  listId   = req.params;
         const paramId = parseInt(listId.id);
         const { id } = {"id":paramId};
         const updList = new List({...req.body, id});
        
-
             try {
                 await updList.save();
                 res.json(updList)
@@ -96,7 +80,6 @@ const listController = {
             }
     },
 
-    
     deleteList:async (req,res)=> {
 
         const user =req.decoded;
@@ -121,13 +104,10 @@ const listController = {
             } else {
                 res.status(404).json("The list selected doesn't exist");
             }
-        }else{
+        } else {
             res.status(401).json("The list selected isn't yours");
         }
-    
     },
-
-
 };
 
 module.exports = listController;

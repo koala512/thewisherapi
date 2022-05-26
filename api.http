@@ -1,0 +1,10 @@
+### create user 
+POST https://localhost:5002/user
+Content-Type: application/json
+
+{
+    "pseudo":"mlf",
+    "email":"mlf@gmail.com",
+    "password":"plf",
+
+}
