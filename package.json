@@ -13,8 +13,8 @@
     "url-metadata": "^2.5.0"
   },
   "scripts": {
-    "start": "NODE_ENV=production node ./app.js",
-    "dev": "NODE_ENV=developmennt nodemon ./app.js"
+    "start": "node ./app.js",
+    "dev": "nodemon ./app.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
