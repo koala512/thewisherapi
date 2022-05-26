@@ -14,10 +14,11 @@ app.use(express.json());
 
 require('./src/routes/createUser')(app)
 require('./src/routes/login')(app)
+require('./src/routes/createList')(app)
 
 
 app.listen( PORT , async () => {
     console.log(`Server up on http://localhost:${PORT}`)
     await sequelize.authenticate()
     console.log('Database Connected!')
-  })
+  }) 
